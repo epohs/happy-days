@@ -1,0 +1,14 @@
+# This file is used by pip to install required python packages
+# Usage: pip install -r requirements.txt
+
+# Forms validation and rendering
+Flask-WTF>=0.14.2
+
+# Database ORM
+Flask-SQLAlchemy>=2.4.0
+
+# Database migrations using Alembic
+Flask-Migrate>=2.5.2
+
+# User session management
+Flask-Login>=0.4.1

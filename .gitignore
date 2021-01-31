@@ -10,3 +10,11 @@ venv/
 
 # Let's Encrypt
 .well-known/
+
+# Configuration files
+/config.py
+
+# Database
+*.sqlite
+*.sqlite3
+/migrations/
