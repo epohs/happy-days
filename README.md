@@ -1,3 +1,3 @@
 # Happy Days
 
-## Daily happiness monitor
+## Keep track of your mindset
