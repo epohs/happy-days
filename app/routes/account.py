@@ -1,11 +1,12 @@
 from config import AdminUser
-from app import app
+from app import app, db
 from app.models import User
 from app.forms import LoginForm
 from sqlalchemy.orm.exc import NoResultFound
+from werkzeug.security import generate_password_hash
 from flask import render_template, flash, url_for, redirect, request
 from flask_login import current_user, login_user, logout_user
-
+import re
 
 
 def login_check():
@@ -31,7 +32,13 @@ def login_check():
     
     return [False, 'login']
 
+    
+
+def check_email_format(str):
+
+  regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
   
+  return re.search(regex, str)
   
 
 
@@ -77,6 +84,65 @@ def logout():
 
 @app.route('/setup')
 def setup():
-    return render_template('setup.html', title='Setup', user=AdminUser)
+  
+  modify_user = True
+  update_confirmed = False
+  #user_modified = True if (request.args['user_modified'] == 'true') else False
+  user_modified = False
+  bullets = []
+  
+  # Check the validity of the Admin User in config file.
+  if ( not AdminUser.USER or len(AdminUser.USER) < 5 ):
+    
+    bullets.append( {'text': 'Username required'} )
+    
+  if ( not AdminUser.PASS or len(AdminUser.PASS) < 6 ):
+    
+    bullets.append( {'text': 'Password required'} )
+    
+  if ( not AdminUser.EMAIL or not check_email_format(AdminUser.EMAIL) ):
+    
+    bullets.append( {'text': 'Email required'} )
+    
+  
+  # If we don't have any warning bullets
+  # the user format is okay.
+  if ( len(bullets) <= 0 ):
+    
+    modify_user = True
+    
+
+  ## Here we go
+  if ( modify_user and (request.args.get('modify_user') == 'yes') ):
+    
+    user = User.query.filter_by(username=AdminUser.USER).first()
+
+    if ( user is None ):
+      
+      newUser = User(username = AdminUser.USER,
+                      email = AdminUser.EMAIL,
+                      password_hash = generate_password_hash(
+                        AdminUser.PASS,
+                        method='sha256'
+                      )
+                    )
+
+      db.session.add(newUser)
+      
+    else:
+      
+      user.email = AdminUser.EMAIL
+      user.password_hash = generate_password_hash(
+                          AdminUser.PASS,
+                          method='sha256'
+                        )
+      
+    db.session.commit()
+    
+    user_modified = True
+
+
+  
+  return render_template('setup.html', title='Setup', bullets=bullets, modify_user=True, user_modified=user_modified)
 
     

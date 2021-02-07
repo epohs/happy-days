@@ -35,24 +35,28 @@ def links():
 
     bullets = [
         {
-            'text': 'Flask, nginx, gunicorn, supervisor',
-            'href': 'https://medium.com/ymedialabs-innovation/deploy-flask-app-with-nginx-using-gunicorn-and-supervisor-d7a93aa07c18'
+          'text': 'Flask, nginx, gunicorn, supervisor',
+          'href': 'https://medium.com/ymedialabs-innovation/deploy-flask-app-with-nginx-using-gunicorn-and-supervisor-d7a93aa07c18'
         },
         {
-            'text': 'Gunicorn',
-            'href': 'http://docs.gunicorn.org/en/19.0/settings.html'
+          'text': 'Flask Login',
+          'href': 'https://hackersandslackers.com/flask-login-user-authentication/'  
         },
         {
-            'text': 'Flask tutorial',
-            'href': 'https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world'
+          'text': 'Gunicorn',
+          'href': 'http://docs.gunicorn.org/en/19.0/settings.html'
         },
         {
-            'text': 'Minesweeper',
-            'href': request.host_url + 'fuh'
+          'text': 'Flask tutorial',
+          'href': 'https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world'
         },
         {
-            'text': 'Home',
-            'href': url_for('index')
+          'text': 'Minesweeper',
+          'href': request.host_url + 'fuh'
+        },
+        {
+          'text': 'Home',
+          'href': url_for('index')
         }
     ]
 

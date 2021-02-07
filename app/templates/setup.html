@@ -1,14 +1,36 @@
-<html>
-    <head>
-        <title>{{ title }}</title>
-    </head>
-    <body>
-        <h1>{{ title }}</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+</head>
+<body>
+  
+  <h1>{{ title }}</h1>
 
-        
-        <ul>
-          <li>New user: '{{ user.USER }}'</li>
-        </ul>
-        
-    </body>
+  {% if bullets %}
+  <ul>
+    {% for bullet in bullets %}
+    <li>{{ bullet.text }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  
+  
+  {% if user_modified %}
+    <p>The database was updated. You should set all of your Admin User fields
+      to false in config.py <strong>right now</strong>.</p>
+    <p>After you've cleared your config file you can <a href="{{ url_for('login') }}">Log in</a>.</p>
+  {% endif %}
+  
+  
+  {% if modify_user and not user_modified %}
+    <p>
+      <strong>Update the database with the user in your config file?</strong>
+      <a href="{{ url_for('setup') }}?modify_user=yes">Yes</a>
+      <a href="{{ url_for('setup') }}">No</a>
+    </p>
+  {% endif %}
+  
+</body>
 </html>
