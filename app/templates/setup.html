@@ -1,12 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ title }}</title>
-</head>
-<body>
-  
-  <h1>{{ title }}</h1>
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
 
   {% if bullets %}
   <ul>
@@ -32,5 +28,4 @@
     </p>
   {% endif %}
   
-</body>
-</html>
+{% endblock %}

@@ -1,14 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ title }}</title>
-</head>
-<body>
-  
-  <h1>{{ title }}</h1>
+{% extends 'base.html' %}
 
-  <p><a href="{{ url_for('logout') }}">Log out</a>
-  
-</body>
-</html>
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+  <p>Gonna be the main template homepage.</p>
+
+{% endblock %}
