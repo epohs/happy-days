@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, request
 from app import app
-from app.models import User
 from flask_login import current_user
 from app.routes import account
+from app.routes import dashboard
 
 
 #app.url_map.strict_slashes = False
@@ -20,13 +20,12 @@ def clear_trailing():
 
 @app.route('/')
 def index():
-    bullets = [
-        {
-            'text': 'Links',
-            'href': url_for('links')
-        }
-    ]
-    return render_template('index.html', title='Hello, World.', bullets=bullets)
+  
+  logged_in = account.login_check()
+  
+  return redirect(url_for(logged_in[1]))
+  
+  
 
 
 
