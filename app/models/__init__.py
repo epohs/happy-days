@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password = db.Column(db.String(128))
     user_level = db.Column(db.Integer, index=False, unique=False, nullable=True, default=0)
-    created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+    created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True,  default=datetime.utcnow)
     last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     entries = db.relationship('Entry', backref='author', lazy='dynamic')
 
@@ -39,8 +39,9 @@ class User(UserMixin, db.Model):
 class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     val = db.Column(db.Integer)
-    entry_type_id = db.Column(db.Integer)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    entry_type_id = db.Column(db.Integer, nullable=True, default=0)
+    created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True,  default=datetime.utcnow)
+    modified_on = db.Column(db.DateTime, index=False, unique=False, nullable=True,  default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
