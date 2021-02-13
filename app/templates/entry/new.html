@@ -4,6 +4,13 @@
 
 {% block content %}
 
- <p>Add a new entry</p>
+  <form action="{{ url_for('new_entry') }}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.val.label }}<br>
+        {{ form.val(min='0', max='5', step="0.5") }}
+      </p>
+    <p>{{ form.submit() }}</p>
+  </form>
   
 {% endblock %}
