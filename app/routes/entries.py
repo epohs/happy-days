@@ -52,6 +52,28 @@ def new_entry():
         
         db.session.add(newOutlook)
       
+      if energy is not None and energy > 0:
+        
+        newEnergy = Entry(
+                        val = energy,
+                        entry_type_id = 2,
+                        parent = newEntry.id,
+                        user_id = g.user
+                      )
+        
+        db.session.add(newEnergy)
+
+      if focus is not None and focus > 0:
+        
+        newFocus = Entry(
+                        val = focus,
+                        entry_type_id = 3,
+                        parent = newEntry.id,
+                        user_id = g.user
+                      )
+        
+        db.session.add(newFocus)
+      
       db.session.commit()
     
     flash('New entry added.')
