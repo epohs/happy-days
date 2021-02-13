@@ -38,7 +38,7 @@ class User(UserMixin, db.Model):
 
 class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    val = db.Column(db.Integer)
+    val = db.Column(db.Float)
     entry_type_id = db.Column(db.Integer, nullable=True, default=0)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True,  default=datetime.utcnow)
     modified_on = db.Column(db.DateTime, index=False, unique=False, nullable=True,  default=datetime.utcnow)
