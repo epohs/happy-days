@@ -3,6 +3,7 @@ from app import app
 from flask_login import current_user
 from app.routes import account
 from app.routes import dashboard
+from app.routes import entries
 
 
 #app.url_map.strict_slashes = False

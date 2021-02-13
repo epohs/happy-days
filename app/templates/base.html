@@ -20,7 +20,15 @@
   
   {% block content %}{% endblock %}
   
-  <p><a href="{{ url_for('logout') }}">Log out</a>
+  <footer class="footer">
+    
+    <a href="{{ url_for('index') }}">Home</a>
+    
+    <a href="{{ url_for('new_entry') }}">New</a>
+    
+    <a href="{{ url_for('logout') }}">Log out</a>
+    
+  </footer>
       
 </body>
 </html>
