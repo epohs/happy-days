@@ -33,6 +33,10 @@ def new_entry():
     
     db.session.commit()
     
+    flash('New entry added.')
+    
+    return redirect(url_for('dashboard'))
+    
   elif request.method == 'POST':
 
     flash('Something wasn’t right')
