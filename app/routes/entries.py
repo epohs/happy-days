@@ -22,7 +22,10 @@ def new_entry():
   
   if request.method == 'POST' and form.validate_on_submit():
     
-    overall = request.form['overall']
+    overall = request.form.get('overall', type=float)
+    outlook = request.form.get('outlook', type=float)
+    energy = request.form.get('energy', type=float)
+    focus = request.form.get('focus', type=float)
     
     newEntry = Entry(
                   val = overall,
@@ -32,6 +35,24 @@ def new_entry():
     db.session.add(newEntry)
     
     db.session.commit()
+
+
+    # Add the extra entry attributes if they
+    # were filled out.
+    if newEntry.id is not None:
+      
+      if outlook is not None and outlook > 0:
+        
+        newOutlook = Entry(
+                        val = outlook,
+                        entry_type_id = 1,
+                        parent = newEntry.id,
+                        user_id = g.user
+                      )
+        
+        db.session.add(newOutlook)
+      
+      db.session.commit()
     
     flash('New entry added.')
     
