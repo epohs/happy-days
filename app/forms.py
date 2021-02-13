@@ -11,5 +11,5 @@ class LoginForm(FlaskForm):
     
     
 class NewEntry(FlaskForm):
-  val = DecimalRangeField('val', places="1", validators=[DataRequired()])
+  overall = DecimalRangeField('Overall', places="1", validators=[DataRequired()])
   submit = SubmitField('Add entry')
