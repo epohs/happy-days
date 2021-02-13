@@ -10,7 +10,7 @@ class LoginForm(FlaskForm):
   submit = SubmitField('Sign In')
     
     
-  class NewEntry(FlaskForm):
+class NewEntry(FlaskForm):
   
   overall = DecimalRangeField('Overall', places="1", 
                               validators=[DataRequired(), NumberRange(min=0, max=5)])
