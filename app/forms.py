@@ -12,4 +12,7 @@ class LoginForm(FlaskForm):
     
 class NewEntry(FlaskForm):
   overall = DecimalRangeField('Overall', places="1", validators=[DataRequired()])
+  outlook = DecimalRangeField('Outlook', places="1", validators=[DataRequired()])
+  energy = DecimalRangeField('Energy level', places="1", validators=[DataRequired()])
+  focus = DecimalRangeField('Focus', places="1", validators=[DataRequired()])
   submit = SubmitField('Add entry')

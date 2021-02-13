@@ -15,7 +15,7 @@ def dashboard():
     
     return redirect(url_for('index'))
   
-  recent_entries = Entry.query.filter_by(user_id=g.user).order_by(Entry.created_on.desc()).limit(30)
+  recent_entries = Entry.query.filter_by(user_id=g.user, parent=0).order_by(Entry.created_on.desc()).limit(30)
   
   
   return render_template('dashboard.html', title='Dashboard', recent_entries=recent_entries)
