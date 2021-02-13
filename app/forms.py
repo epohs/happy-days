@@ -10,9 +10,14 @@ class LoginForm(FlaskForm):
   submit = SubmitField('Sign In')
     
     
-class NewEntry(FlaskForm):
-  overall = DecimalRangeField('Overall', places="1", validators=[DataRequired(), NumberRange()])
-  outlook = DecimalRangeField('Outlook', places="1", validators=[NumberRange()])
-  energy = DecimalRangeField('Energy level', places="1", validators=[NumberRange()])
-  focus = DecimalRangeField('Focus', places="1", validators=[NumberRange()])
+  class NewEntry(FlaskForm):
+  
+  overall = DecimalRangeField('Overall', places="1", 
+                              validators=[DataRequired(), NumberRange(min=0, max=5)])
+  outlook = DecimalRangeField('Outlook', places="1", 
+                              validators=[NumberRange(min=0, max=5)])
+  energy = DecimalRangeField('Energy level', places="1", 
+                              validators=[NumberRange(min=0, max=5)])
+  focus = DecimalRangeField('Focus', places="1", 
+                              validators=[NumberRange(min=0, max=5)])
   submit = SubmitField('Add entry')
