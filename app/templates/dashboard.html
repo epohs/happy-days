@@ -4,6 +4,14 @@
 
 {% block content %}
 
+  {% if recent_entries %}
+  <ul class="recent-entries">
+      {% for entry in recent_entries %}
+      <li>{{ entry.created_on.strftime('%b. %d') }} - {{ entry.val }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
   <p>Gonna be the main template homepage.</p>
 
 {% endblock %}
