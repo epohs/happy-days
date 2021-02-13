@@ -121,7 +121,7 @@ def setup():
       
       newUser = User(username = AdminUser.USER,
                       email = AdminUser.EMAIL,
-                      password_hash = generate_password_hash(
+                      password = generate_password_hash(
                         AdminUser.PASS,
                         method='sha256'
                       )
@@ -132,7 +132,7 @@ def setup():
     else:
       
       user.email = AdminUser.EMAIL
-      user.password_hash = generate_password_hash(
+      user.password = generate_password_hash(
                           AdminUser.PASS,
                           method='sha256'
                         )

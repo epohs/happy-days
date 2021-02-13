@@ -14,7 +14,10 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    password = db.Column(db.String(128))
+    user_level = db.Column(db.Integer, index=False, unique=False, nullable=True, default=0)
+    created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+    last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     entries = db.relationship('Entry', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -22,11 +25,11 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         """Check hashed password."""
-        return check_password_hash(self.password_hash, password)
+        return check_password_hash(self.password, password)
         
     def set_password(self, password):
         """Create hashed password."""
-        self.password_hash = generate_password_hash(
+        self.password = generate_password_hash(
             password,
             method='sha256'
             )
