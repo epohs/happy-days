@@ -1,11 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}{% endblock %} - Happy Days</title>
+<meta charset="utf-8">
+<title>{% block title %}{% endblock %} - Happy Days</title>
 {% assets "css_all" %}
   <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
 {% endassets %}
+{% assets "js_all" %}
+  <script src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 </head>
 <body>
   

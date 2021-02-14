@@ -9,12 +9,18 @@ from flask_assets import Bundle
 
 #app.url_map.strict_slashes = False
 
-#def __init__(self):
+def make_asset_bundles():
   
-css = Bundle('css/reset.css', 'css/fonts.css', 'css/base.css', 'css/responsive.css',
-            filters='cssmin', output='packed/app.css')
+  css = Bundle('css/reset.css', 'css/fonts.css', 'css/base.css', 'css/responsive.css',
+              filters='cssmin', output='packed/app.css')
+    
+  js = Bundle('js/base.js',
+              filters='jsmin', output='packed/app.js')
 
-assets.register('css_all', css)
+  assets.register('css_all', css)              
+  assets.register('js_all', js)
+
+
 
 
 @app.before_request
