@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *.pyc
+.webassets-cache
 
 # Virtual Environments
 .env

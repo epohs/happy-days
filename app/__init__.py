@@ -13,7 +13,7 @@ login = LoginManager(app)
 assets = Environment(app)
 assets.debug = Config.DEBUG
 
-css = Bundle('reset.css', 'fonts.css', 'base.css', 'responsive.css',
+css = Bundle('css/reset.css', 'css/fonts.css', 'css/base.css', 'css/responsive.css',
             filters='cssmin', output='packed/app.css')
 
 assets.register('css_all', css)
