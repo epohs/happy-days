@@ -1,4 +1,4 @@
-from app import app
+from app import app, assets
 from app.models import Entry
 from flask import g
 from flask import render_template, flash, url_for, redirect, request

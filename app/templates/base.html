@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %} - Happy Days</title>
+{% assets "css_all" %}
+  <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+{% endassets %}
 </head>
 <body>
   

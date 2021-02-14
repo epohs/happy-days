@@ -13,6 +13,11 @@ login = LoginManager(app)
 assets = Environment(app)
 assets.debug = Config.DEBUG
 
+css = Bundle('reset.css', 'fonts.css', 'base.css', 'responsive.css',
+            filters='cssmin', output='packed/app.css')
+
+assets.register('css_all', css)
+
 from app import routes, models
 
 
