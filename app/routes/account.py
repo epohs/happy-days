@@ -2,7 +2,6 @@ from config import AdminUser
 from app import app, db
 from app.models import User
 from app.forms import LoginForm
-from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.security import generate_password_hash
 from flask import render_template, flash, url_for, redirect, request
 from flask_login import current_user, login_user, logout_user
@@ -17,7 +16,7 @@ def login_check():
     
     user = User.query.one()
     
-  except NoResultFound as e:
+  except:
     
     return [False, 'setup']
 

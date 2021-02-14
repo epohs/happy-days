@@ -18,7 +18,7 @@ css = Bundle('css/reset.css', 'css/fonts.css', 'css/base.css', 'css/responsive.c
 
 assets.register('css_all', css)
 
-from app import routes, models
+from app import models, routes
 
 
 if __name__ == '__main__':
