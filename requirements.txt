@@ -15,3 +15,6 @@ Flask-Login>=0.4.1
 
 # Bundle and auto-minify assets
 Flask-Assets>=2.0
+
+# CSS Minification
+cssmin>=0.2.0
