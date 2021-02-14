@@ -1,12 +1,20 @@
 from flask import render_template, url_for, redirect, request
-from app import app
+from app import app, assets
 from flask_login import current_user
 from app.routes import account
 from app.routes import dashboard
 from app.routes import entries
+from flask_assets import Bundle
 
 
 #app.url_map.strict_slashes = False
+
+#def __init__(self):
+  
+css = Bundle('css/reset.css', 'css/fonts.css', 'css/base.css', 'css/responsive.css',
+            filters='cssmin', output='packed/app.css')
+
+assets.register('css_all', css)
 
 
 @app.before_request
