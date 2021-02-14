@@ -89,4 +89,4 @@ def new_entry():
   now = datetime.now() # current date and time
   date_time = now.strftime("%A, %b. %d %Y")
   
-  return render_template('entry/new.html', title='New entry - {}'.format(date_time), form=form)
+  return render_template('entry/new.html', title='New entry', subhead=format(date_time), form=form)

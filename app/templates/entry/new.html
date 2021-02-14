@@ -2,6 +2,14 @@
 
 {% block title %}{{title}}{% endblock %}
 
+
+{% block subhead %}
+  {% if subhead is defined and subhead|length %}
+  <h2 class="subhead">{{ subhead }}</h2>
+  {% endif %}
+{% endblock %}
+
+
 {% block content %}
 
   <form action="{{ url_for('new_entry') }}" method="post" novalidate>
