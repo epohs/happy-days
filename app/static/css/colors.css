@@ -10,6 +10,11 @@
 	--link-hover: #14ffec;
 	--link-active: #14ffec;
 	--link-visited: #0d7377;
+
+
+	--entry: #69AC99;
+	--entry-on: #70B8A3;
+	--entry-off: #416B5F;
 }
 
 @media ( prefers-color-scheme: light ) {
