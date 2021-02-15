@@ -19,6 +19,7 @@
       {{ form.overall.label }}<br>
       {{ form.overall(min='0', max='5', step="0.5") }}
     </p>
+
     <hr />
 
     <p>
@@ -30,11 +31,11 @@
       {{ form.energy(min='0', max='5', step="0.5", value="0") }}
     </p>
     <p>
-      {{ form.focus.label }}<br>
+      {{ form.focus.label(class="label") }}<br>
       {{ form.focus(min='0', max='5', step="0.5", value="0") }}
     </p>
     
-    <p>{{ form.submit() }}</p>
+    <p>{{ form.submit(class="btn btn-entry") }}</p>
   </form>
   
 {% endblock %}

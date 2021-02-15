@@ -28,6 +28,23 @@ a:active {
 }
 
 
+.btn {
+  appearance: none;
+  padding: 0.5em 1em;
+  border: none;
+  background-color: var(--btn-bg);
+  font-weight: 400;
+  border-radius: 0.25em;
+}
+
+.btn-entry {
+  background-color:var(--btn-entry-bg);
+}
+
+
+/* Styling form fields */
+/* https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ */
+
 
 
 .page-header,
@@ -152,6 +169,10 @@ a:active {
 .recent-entries .entry .link:hover .summary {
   background-color: var(--entry-on);
 }
+
+
+
+
 
 
 
