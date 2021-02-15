@@ -12,30 +12,45 @@
 
 {% block content %}
 
-  <form action="{{ url_for('new_entry') }}" method="post" novalidate>
+  <form action="{{ url_for('new_entry') }}" method="post" class="hd-form" novalidate>
+
     {{ form.hidden_tag() }}
-    
-    <p>
-      {{ form.overall.label }}<br>
-      {{ form.overall(min='0', max='5', step="0.5") }}
-    </p>
 
-    <hr />
+    <fieldset class="fieldset required">
 
-    <p>
-      {{ form.outlook.label }}<br>
-      {{ form.outlook(min='0', max='5', step="0.5", value="0") }}
-    </p>
-    <p>
-      {{ form.energy.label }}<br>
-      {{ form.energy(min='0', max='5', step="0.5", value="0") }}
-    </p>
-    <p>
-      {{ form.focus.label(class="label") }}<br>
-      {{ form.focus(min='0', max='5', step="0.5", value="0") }}
-    </p>
+      <legend class="legend">Required</legend>
+
+      <div class="field-wrap field-{{ form.overall.name|lower|replace(' ','-') }}">
+        <span class="label-wrap">{{ form.overall.label(class="label") }}</span>
+        <span class="input-wrap">{{ form.overall(min='0', max='5', step="0.5") }}</span>
+      </div>
+
+    </fieldset>
+
+
+    <fieldset class="fieldset optional">
+
+      <legend class="legend">Optional</legend>
+
+      <div class="field-wrap field-{{ form.outlook.name|lower|replace(' ','-') }}">
+        <span class="label-wrap">{{ form.outlook.label(class="label") }}</span>
+        <span class="input-wrap">{{ form.outlook(min='0', max='5', step="0.5", value="0") }}</span>
+      </div>
+      
+      <div class="field-wrap field-{{ form.energy.name|lower|replace(' ','-') }}">
+        <span class="label-wrap">{{ form.energy.label(class="label") }}</span>
+        <span class="input-wrap">{{ form.energy(min='0', max='5', step="0.5", value="0") }}</span>
+      </div>
+
+      <div class="field-wrap field-{{ form.focus.name|lower|replace(' ','-') }}">
+        <span class="label-wrap">{{ form.focus.label(class="label") }}</span>
+        <span class="input-wrap">{{ form.focus(min='0', max='5', step="0.5", value="0") }}</span>
+      </div>
+
+    </fieldset>
     
-    <p>{{ form.submit(class="btn btn-entry") }}</p>
+    <div class="field-wrap field-{{ form.submit.name|lower|replace(' ','-') }}">{{ form.submit(class="btn btn-entry") }}</div>
+
   </form>
   
 {% endblock %}

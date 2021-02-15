@@ -35,10 +35,15 @@ a:active {
   background-color: var(--btn-bg);
   font-weight: 400;
   border-radius: 0.25em;
+  cursor: pointer;
 }
 
 .btn-entry {
   background-color:var(--btn-entry-bg);
+}
+
+.btn:hover {
+  filter: brightness(115%) saturate(120%);
 }
 
 
@@ -73,6 +78,10 @@ a:active {
   max-width: 60rem; 
   margin: 0 auto;
 }
+
+
+
+
 
 
 
@@ -118,7 +127,18 @@ a:active {
   overflow: hidden;
 }
 
-.recent-entries .entry.multiple-entries .link::after {
+.recent-entries .entry .summary {
+	position: relative;
+  flex-basis: 50%;
+  flex-grow: 0;
+  flex-shrink: 1;
+  transition: flex-basis 0.15s ease-in-out;
+  text-indent: -99em;
+  overflow: hidden;
+  background-color: var(--entry);
+}
+
+.recent-entries .entry.multiple-entries .summary::after {
   display: block;
   position: absolute;
   bottom: 0;
@@ -132,16 +152,6 @@ a:active {
   transform: rotate(45deg);
   margin-right: -38%;
   margin-bottom: -38%;
-}
-
-.recent-entries .entry .summary {
-  flex-basis: 50%;
-  flex-grow: 0;
-  flex-shrink: 1;
-  transition: flex-basis 0.15s ease-in-out;
-  text-indent: -99em;
-  overflow: hidden;
-  background-color: var(--entry);
 }
 
 .recent-entries .entry.entry-val-00 .link .summary { flex-basis: 0; }
@@ -168,6 +178,80 @@ a:active {
 
 .recent-entries .entry .link:hover .summary {
   background-color: var(--entry-on);
+}
+
+
+
+
+
+
+
+
+
+/* Forms */
+
+.hd-form {
+}
+
+.hd-form .fieldset {
+  position: relative;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hd-form .fieldset.required {
+  padding-bottom: 0.75em;
+  margin-bottom: 2em;
+}
+
+.hd-form .fieldset.required::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 2px;
+  width: 100%;
+  max-width: 20em;
+  transform: translateX(-50%);
+  background-color: var(--border-light);
+}
+
+.hd-form .legend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+.hd-form .field-wrap {
+  margin-bottom: 1em;
+}
+
+.hd-form .label-wrap {
+  display: block;
+}
+
+.hd-form .label {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.hd-form .fieldset.required .label {
+  font-size: 2em;
+  font-weight: 400;
+}
+
+.hd-form .input-wrap {
+  display: block;
+}
+
+
+.hd-form .field-wrap.field-submit {
+  margin-top: 2em;
 }
 
 
