@@ -77,27 +77,27 @@ a:active {
   transition: flex-basis 0.15s ease-in-out;
 }
 
-.recent-entries .entry.entry-val-0 .link { flex-basis: 0; }
+.recent-entries .entry.entry-val-00 .link { flex-basis: 0; }
 
 .recent-entries .entry.entry-val-05 .link { flex-basis: 10%; }
 
-.recent-entries .entry.entry-val-1 .link { flex-basis: 20%; }
+.recent-entries .entry.entry-val-10 .link { flex-basis: 20%; }
 
 .recent-entries .entry.entry-val-15 .link { flex-basis: 30%; }
 
-.recent-entries .entry.entry-val-2 .link { flex-basis: 40%; }
+.recent-entries .entry.entry-val-20 .link { flex-basis: 40%; }
 
 .recent-entries .entry.entry-val-25 .link { flex-basis: 50%; }
 
-.recent-entries .entry.entry-val-3 .link { flex-basis: 60%; }
+.recent-entries .entry.entry-val-30 .link { flex-basis: 60%; }
 
 .recent-entries .entry.entry-val-35 .link { flex-basis: 70%; }
 
-.recent-entries .entry.entry-val-4 .link { flex-basis: 80%; }
+.recent-entries .entry.entry-val-40 .link { flex-basis: 80%; }
 
 .recent-entries .entry.entry-val-45 .link { flex-basis: 90%; }
 
-.recent-entries .entry.entry-val-5 .link { flex-basis: 100%; }
+.recent-entries .entry.entry-val-50 .link { flex-basis: 100%; }
 
 .recent-entries .entry:hover .link {
   background-color: var(--entry-on);
