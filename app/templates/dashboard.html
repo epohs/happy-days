@@ -20,7 +20,13 @@
 
   	{% endif %}
 
-    <li>{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</li>
+  	{% set entry_val_class = 'entry-val-' ~ val|replace('.', '') %}
+ 
+    <li class="entry {{ entry_val_class }}{% if multiple_entries %} multiple-entries{% endif %}">
+
+    	<a href="#" class="link"><span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span></a>
+
+  	</li>
 
   {% endfor %}
   </ul>
