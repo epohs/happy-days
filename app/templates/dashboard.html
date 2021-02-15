@@ -6,9 +6,23 @@
 
   {% if recent_entries %}
   <ul class="recent-entries">
-      {% for entry in recent_entries %}
-      <li>{{ entry.created_on.strftime('%b. %d') }} - {{ entry.val }}</li>
-      {% endfor %}
+  {% for entry in recent_entries %}
+    
+    {% if entry.num_entries > 1 %}
+
+  		{% set val = ((entry.avg|round() * 2) / 2) %}
+  		{% set multiple_entries = True %}
+
+  	{% else %}
+
+  		{% set val = entry.avg %}
+  		{% set multiple_entries = False %}
+
+  	{% endif %}
+
+    <li>{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</li>
+
+  {% endfor %}
   </ul>
   {% endif %}
 
