@@ -10,7 +10,7 @@
     
     {% if entry.num_entries > 1 %}
 
-  		{% set val = ((entry.avg|round() * 2) / 2) %}
+  		{% set val = ((entry.avg|round(1, 'ceil') * 2) / 2) %}
   		{% set multiple_entries = True %}
 
   	{% else %}
@@ -22,7 +22,7 @@
 
   	{% set entry_val_class = 'entry-val-' ~ val|replace('.', '') %}
  
-    <li class="entry {{ entry_val_class }}{% if multiple_entries %} multiple-entries{% endif %}" data-val-raw="{{ entry.avg }}">
+    <li class="entry {{ entry_val_class }}{% if multiple_entries %} multiple-entries{% endif %}" data-val-raw="{{ entry.avg }}" data-val-rounded="{{ entry.avg|round(1, 'ceil') }}">
 
     	<a href="#" class="link"><span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span></a>
 
