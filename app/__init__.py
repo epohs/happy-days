@@ -12,7 +12,8 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 assets = Environment(app)
 assets.debug = Config.DEBUG
-
+assets.cache = not Config.DEBUG
+assets.url_expire = Config.DEBUG
 
 from app import models, routes
 
