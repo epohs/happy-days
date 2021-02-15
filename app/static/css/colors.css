@@ -1,5 +1,5 @@
 :root {
-	
+
   color-scheme: light dark;
 
 	--main-bg: #212121;
@@ -21,10 +21,10 @@
 	--border-dark: #111;
 	--border-medium: #1a1a1a;
 	--border-light: #444;
-	
+
 	--btn-bg: #505FB3;
 	--btn-entry-bg: #6AB364;
-	
+
 }
 
 
@@ -37,9 +37,9 @@
 		--main-bg: #faf6e9;
 		--secondary-bg: #fffdf6;
 		--deep-bg: #E6E4DC;
-	
+
 		--main-font: #403F3D;
-		
+
   	--border-dark: #BFBEB8;
 		--border-medium: #F0ECDF;
 		--border-light: #fff;
