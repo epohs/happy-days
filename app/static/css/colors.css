@@ -3,6 +3,7 @@
 
 	--main-bg: #212121;
 	--secondary-bg: #323232;
+	--deep-bg: #1d1d1d;
 
 	--main-font: #ece8d9;
 
@@ -15,6 +16,8 @@
 	--entry: #69AC99;
 	--entry-on: #70B8A3;
 	--entry-off: #416B5F;
+	
+	--outline-dark: #111;
 }
 
 @media ( prefers-color-scheme: light ) {
@@ -22,8 +25,11 @@
 	:root {
 		--main-bg: #faf6e9;
 		--secondary-bg: #fffdf6;
+		--deep-bg: #E6E4DC;
 	
-		--main-font: #212121;
+		--main-font: #403F3D;
+		
+  	--outline-dark: #BFBEB8;
 	}
 
 }
