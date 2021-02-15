@@ -17,7 +17,9 @@
 	--entry-on: #70B8A3;
 	--entry-off: #416B5F;
 	
-	--outline-dark: #111;
+	--border-dark: #111;
+	--border-medium: #1a1a1a;
+	--border-light: #444;
 }
 
 @media ( prefers-color-scheme: light ) {
@@ -29,7 +31,9 @@
 	
 		--main-font: #403F3D;
 		
-  	--outline-dark: #BFBEB8;
+  	--border-dark: #BFBEB8;
+		--border-medium: #F0ECDF;
+		--border-light: #fff;
 	}
 
 }

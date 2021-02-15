@@ -10,6 +10,8 @@
   .footer {
     top: 0;
     width: 7rem;
+    border-top: none;
+  	border-right: 1px solid var(--border-medium);
   }
   
   .footer .nav {

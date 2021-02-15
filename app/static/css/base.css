@@ -2,6 +2,7 @@
 body {
   font-family: 'system-ui';
   color: var(--main-font);
+  letter-spacing: 0.05em;
   background-color: var(--main-bg);
 }
 
@@ -35,11 +36,26 @@ a:active {
   padding: 0 5vw;
 }
 
+.page-header {
+  margin-bottom: 3em;
+  padding-top: 0.5em;
+}
+
+.page-header .page-title {
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
+.page-header .subhead {
+  font-weight: 100;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
 .page-body .content {
   max-width: 60rem; 
   margin: 0 auto;
 }
-
 
 
 
@@ -53,9 +69,9 @@ a:active {
   flex-direction: row-reverse;
   align-items: stretch;
   height: 10em;
-  margin: 0 -0.5px;
+  margin: 1em 0;
   padding: 0;
-  border: 1px solid var(--outline-dark);
+  border: 1px solid var(--border-dark);
   background-color: var(--deep-bg);
 }
 
@@ -65,6 +81,14 @@ a:active {
   height: 100%;
   margin: 0 .5px;
   overflow: hidden;
+}
+
+.recent-entries .entry:first-of-type {
+  margin-right: 0;
+}
+
+.recent-entries .entry:last-of-type {
+  margin-left: 0;
 }
 
 .recent-entries .entry .link {
@@ -139,6 +163,7 @@ a:active {
   bottom: 0;
   left: 0;
   width: 100%;
+  border-top: 1px solid var(--border-light);
   background-color: var(--secondary-bg);
 }
 
