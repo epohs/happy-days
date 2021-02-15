@@ -21,33 +21,67 @@
     
   </header>
   
+  
+  
+  
   {% with messages = get_flashed_messages() %}
+  
     {% if messages %}
-    <ul class="flash">
+    
+    <aside class="flash">
+      
+      <ul class="messages">
+      
         {% for message in messages %}
-        <li>{{ message }}</li>
+        
+        <li class="message">{{ message }}</li>
+      
         {% endfor %}
-    </ul>
+        
+      </ul>
+      
+    </aside>
+    
     {% endif %}
+    
   {% endwith %}
   
-  {% block content %}{% endblock %}
+  
+  
+  <main class="page-body">
+  
+    <article class="content">
+      
+      {% block content %}{% endblock %}
+      
+    </article>
+    
+  </main>
+  
+  
+  
   
   <footer class="footer">
     
-    <a href="{{ url_for('index') }}">Home</a>
+    <nav class="nav">
     
-    {% if current_user.is_authenticated %}
+      <ul class="nav-items">
+        
+        <li class="nav-item home"><a href="{{ url_for('index') }}" class="link">Home</a>
     
-      <a href="{{ url_for('new_entry') }}">New</a>
-      
-      <a href="{{ url_for('logout') }}">Log out</a>
-      
-    {% else %}
-      
-      <a href="{{ url_for('login') }}">Log in</a>
+        {% if current_user.is_authenticated %}
     
-    {% endif %}
+        <li class="nav-item new-entry"><a href="{{ url_for('new_entry') }}" class="link">New</a></li>
+      
+        <li class="nav-item logout"><a href="{{ url_for('logout') }}" class="link">Log out</a></li>
+      
+        {% else %}
+      
+        <li class="nav-item login"><a href="{{ url_for('login') }}" class="link">Log in</a></li>
+    
+        {% endif %}
+    
+    </nav>
     
   </footer>
       
