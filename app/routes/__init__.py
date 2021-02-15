@@ -11,7 +11,7 @@ from flask_assets import Bundle
 
 def make_asset_bundles():
   
-  css = Bundle('css/reset.css', 'css/fonts.css', 'css/base.css', 'css/responsive.css',
+  css = Bundle('css/reset.css', 'css/fonts.css', 'css/colors.css', 'css/base.css', 'css/responsive.css',
               filters='cssmin', output='packed/app.css')
     
   js = Bundle('js/base.js',
