@@ -50,7 +50,6 @@ def dashboard():
   entries_in_range = []
 
   # Loop through entire day range.
-  # Search query result object.
   # If no entries found in that day
   # Add an emtpy flag.
   for day_ago in range(30 + 1): 
