@@ -10,21 +10,21 @@
     
     {% if entry.num_entries > 1 %}
 
-  		{% set val = ((entry.avg * 2)|round(0, 'ceil') / 2) %}
-  		{% set multiple_entries = True %}
+      {% set val = ((entry.avg * 2)|round(0, 'ceil') / 2) %}
+      {% set multiple_entries = True %}
 
-  	{% else %}
+    {% else %}
 
-  		{% set val = entry.avg %}
-  		{% set multiple_entries = False %}
+      {% set val = entry.avg %}
+      {% set multiple_entries = False %}
 
-  	{% endif %}
+    {% endif %}
 
-  	{% set entry_val_class = 'entry-val-' ~ val|replace('.', '') %}
+    {% set entry_val_class = 'entry-val-' ~ val|replace('.', '') %}
  
     <li class="entry {{ entry_val_class }}{% if multiple_entries %} multiple-entries{% endif %}" data-val-raw="{{ entry.avg }}" data-val-rounded="{{ entry.avg|round(0, 'ceil') }}">
 
-    	<a href="#" class="link"><span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span></a>
+    	<a href="#" class="link">{{ entry.days_ago|round(0, 'floor')|int }}<span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span></a>
 
   	</li>
 
