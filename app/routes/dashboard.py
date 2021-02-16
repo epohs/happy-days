@@ -4,6 +4,7 @@ from flask import g
 from flask import render_template, flash, url_for, redirect, request
 from flask_login import current_user
 from sqlalchemy import func
+from datetime import datetime, timedelta 
 
 @app.route('/dashboard')
 def dashboard():
@@ -21,16 +22,28 @@ def dashboard():
   avg = func.avg(Entry.val).label('avg')
   num_entries = func.count(Entry.id).label('num_entries')
   
+  current_time = datetime.utcnow()
+  thirty_days_ago = current_time - timedelta(days=30)
+  days_ago = (func.julianday(current_time) - func.julianday(Entry.created_on)).label('days_ago')
+  # last_month = filter(Entry.created_on >= thirty_days_ago)
+  
+  # current_time = datetime.datetime.utcnow()
+  # ten_weeks_ago = current_time - datetime.timedelta(weeks=10)
+  # WHERE date BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime');
+  # .filter(User.birthday <= '1988-01-17').filter(User.birthday >= '1985-01-17')
+  
   recent_entries = db.session.query(
     day,
     avg,
     Entry.created_on,
+    days_ago,
     num_entries
-  ).filter_by(
+  ).filter(Entry.created_on >= thirty_days_ago).\
+    filter_by(
       user_id = g.user,
       parent = 0,
       entry_type_id = 0
-    ).order_by(day.desc()).group_by(day).limit(30)
+    ).order_by(day.desc()).group_by(day).all()
   
   
   return render_template('dashboard.html', title='Dashboard', recent_entries=recent_entries)
