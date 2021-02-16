@@ -139,6 +139,10 @@ a:active {
   background-color: var(--entry);
 }
 
+.recent-entries .entry.no-results .summary {
+  display: none;
+}
+
 .recent-entries .entry.multiple-entries .summary::after {
   display: block;
   position: absolute;

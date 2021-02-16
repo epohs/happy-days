@@ -26,12 +26,8 @@ def dashboard():
   current_time = datetime.utcnow()
   thirty_days_ago = current_time - timedelta(days=30)
   days_ago = (func.julianday(current_time) - func.julianday(Entry.created_on)).label('days_ago')
-  # last_month = filter(Entry.created_on >= thirty_days_ago)
   
-  # current_time = datetime.datetime.utcnow()
-  # ten_weeks_ago = current_time - datetime.timedelta(weeks=10)
-  # WHERE date BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime');
-  # .filter(User.birthday <= '1988-01-17').filter(User.birthday >= '1985-01-17')
+  
   
   recent_entries = db.session.query(
     day,
@@ -39,28 +35,43 @@ def dashboard():
     Entry.created_on,
     days_ago,
     num_entries
-  ).filter(Entry.created_on >= thirty_days_ago).\
-    filter_by(
+  ).filter(Entry.created_on >= thirty_days_ago)\
+    .filter_by(
       user_id = g.user,
       parent = 0,
       entry_type_id = 0
     ).order_by(day.desc()).group_by(day).all()
+
+
+
+
+  # New entries object that has placeholders
+  # for empty rows.
+  entries_in_range = []
+
+  # Loop through entire day range.
+  # Search query result object.
+  # If no entries found in that day
+  # Add an emtpy flag.
+  for day_ago in range(30 + 1): 
     
+    # Filter SQLAlchemy Results Object to find
+    # result matching the day_ago in our loop.
+    # Convert KeyedTuple object using _asdict()
+    day_in_range = [v._asdict() for v in recent_entries if math.floor(v.days_ago) == day_ago]
+    
+    if ( len(day_in_range) ):
+      
+      # Result matching day_ago found.
+      # Append to our new list
+      entries_in_range.append(day_in_range)
+      
+    else:
+      
+      # Result didn't match this day_ago.
+      # Append our empty flag.
+      entries_in_range.append([{'has_no_entry': True}])
   
-  #entries_map = [x for x in recent_entries if math.floor(x.days_ago) == 2]
 
   
-  #flash( team_map )
-  
-  # Add emtpy flag
-  # for entry in recent_entries: 
-  for day_ago in reversed(range(30 + 1)): 
-    #date = entry.__dict__['days_ago']
-    #i.__dict__['date_modified'] = date.replace('/', '-')
-    
-    if ( not len([x for x in recent_entries if math.floor(x.days_ago) == day_ago]) ):
-      
-      flash('Nothing {} days ago'.format(day_ago))
-  
-  
-  return render_template('dashboard.html', title='Dashboard', recent_entries=recent_entries)
+  return render_template('dashboard.html', title='Dashboard', entries_by_day=entries_in_range)
