@@ -30,6 +30,7 @@ a:active {
 
 .btn {
   appearance: none;
+  -webkit-appearance: none;
   padding: 0.5em 1em;
   border: none;
   background-color: var(--btn-bg);
