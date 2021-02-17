@@ -23,9 +23,9 @@ def dashboard():
   avg = func.avg(Entry.val).label('avg')
   num_entries = func.count(Entry.id).label('num_entries')
   
-  current_time = datetime.utcnow()
-  thirty_days_ago = current_time - timedelta(days=31)
-  days_ago = (func.julianday(current_time) - func.julianday(Entry.created_on)).label('days_ago')
+  current_time = datetime.now()
+  thirty_days_ago = current_time - timedelta(days=30)
+  days_ago = (func.julianday(func.strftime('%Y-%m-%d', current_time)) - func.julianday(func.strftime('%Y-%m-%d', Entry.created_on))).label('days_ago')
   
   
   
@@ -40,8 +40,7 @@ def dashboard():
       user_id = g.user,
       parent_id = 0,
       entry_type = 0
-    ).order_by(day.desc()).group_by(day).limit(30)
-
+    ).order_by(day.desc()).group_by(day).all()
 
 
 
@@ -65,7 +64,7 @@ def dashboard():
       # Append to our new list
       entries_in_range.append(day_in_range)
       
-      flash('found entry {} days ago'.format(day_in_range))
+      #flash('found entry {} - {} days ago'.format(day_in_range, day_ago))
       
     else:
       
@@ -73,7 +72,7 @@ def dashboard():
       # Append our empty flag.
       entries_in_range.append([{'has_no_entry': True}])
       
-      flash("no entry {} days ago".format(day_ago))
+      #flash("no entry {} days ago".format(day_ago))
   
 
   
