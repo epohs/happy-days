@@ -38,8 +38,8 @@ def dashboard():
   ).filter(Entry.created_on >= thirty_days_ago)\
     .filter_by(
       user_id = g.user,
-      parent = 0,
-      entry_type_id = 0
+      parent_id = 0,
+      entry_type = 0
     ).order_by(day.desc()).group_by(day).limit(30)
 
 
@@ -65,11 +65,15 @@ def dashboard():
       # Append to our new list
       entries_in_range.append(day_in_range)
       
+      flash('found entry {} days ago'.format(day_in_range))
+      
     else:
       
       # Result didn't match this day_ago.
       # Append our empty flag.
       entries_in_range.append([{'has_no_entry': True}])
+      
+      flash("no entry {} days ago".format(day_ago))
   
 
   
