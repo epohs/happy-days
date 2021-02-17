@@ -4,7 +4,12 @@ from app.models import Entry
 from flask import g
 from flask import render_template, flash, url_for, redirect, request
 from flask_login import current_user
+from sqlalchemy import extract, or_
+from sqlalchemy.dialects import sqlite
 from datetime import datetime
+
+
+
 
 @app.route('/new', methods=['GET', 'POST'])
 def new_entry():
@@ -45,8 +50,8 @@ def new_entry():
         
         newOutlook = Entry(
                         val = outlook,
-                        entry_type_id = 1,
-                        parent = newEntry.id,
+                        entry_type = 1,
+                        parent_id = newEntry.id,
                         user_id = g.user
                       )
         
@@ -56,8 +61,8 @@ def new_entry():
         
         newEnergy = Entry(
                         val = energy,
-                        entry_type_id = 2,
-                        parent = newEntry.id,
+                        entry_type = 2,
+                        parent_id = newEntry.id,
                         user_id = g.user
                       )
         
@@ -67,8 +72,8 @@ def new_entry():
         
         newFocus = Entry(
                         val = focus,
-                        entry_type_id = 3,
-                        parent = newEntry.id,
+                        entry_type = 3,
+                        parent_id = newEntry.id,
                         user_id = g.user
                       )
         
@@ -90,3 +95,67 @@ def new_entry():
   date_time = now.strftime("%A, %b. %d %Y")
   
   return render_template('entry/new.html', title='New entry', subhead=format(date_time), form=form)
+
+
+
+
+
+
+
+@app.route('/entry/by/date/<date_str>')
+def entry_by_date(date_str):
+
+  try:
+
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+    valid_date = True
+
+  except ValueError:
+
+    valid_date = False
+
+    flash('{} is not valid date in the format YYYY-MM-DD'.format(date_str))
+
+
+  if ( valid_date ):
+
+    present = datetime.now().date()
+
+    if ( date_obj <= present ):
+
+      
+      parent_entries = db.session.query(Entry)\
+                      .with_entities(Entry.id)\
+                      .filter(
+                        Entry.parent_id == 0,
+                        extract('day', Entry.created_on) == date_obj.day
+                      )
+                      
+      grouped_entries = db.session.query(Entry)\
+                      .filter(
+                        or_(
+                          Entry.id.in_(parent_entries),
+                          Entry.parent_id.in_(parent_entries),
+                        )
+                      )
+                      
+      entries = grouped_entries.all()
+
+                      
+      flash( [{i:v for i, v in r.__dict__.items() if i in r.__table__.columns.keys()} for r in grouped_entries] )
+      
+      flash( str( grouped_entries.statement.compile(dialect=sqlite.dialect()) ) )
+
+    else:
+
+      entries = False
+
+      flash('date must be in the past')
+
+
+
+  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=entries)
+
+
+
