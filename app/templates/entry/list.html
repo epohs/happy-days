@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+
+{% block subhead %}
+  {% if date_target is defined and date_target|length %}
+  <h2 class="subhead">{{ date_target }}</h2>
+  {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+  {% if entries %}
+
+  {% for entry in entries %}
+
+    <section class="entry">
+      
+      raw: {{ entry[0] }}<br>
+
+      {{ entry.created_on }} <br>
+
+      {{ entry.id }}: {{ entry.val }}
+
+    </section>
+
+  {% endfor %}
+  
+  {% else %}
+  
+    No entries
+    
+  {% endif %}
+  
+{% endblock %}
