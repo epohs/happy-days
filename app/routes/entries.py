@@ -153,9 +153,15 @@ def entry_by_date(date_str):
 
       flash('date must be in the past')
 
-      
+  
+
+  
   if entries:
-    
+  
+    # Convert the flat results object into a nested object
+    # with only the attributes we need. This object will make
+    # it easier to itterate through parents and children in
+    # the template.
     clean_entries = []
     
     for entry in entries:
@@ -183,7 +189,29 @@ def entry_by_date(date_str):
     clean_entries = entries
 
 
-  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=reversed(clean_entries))
+
+
+  # Alias our date formatting to keep queries
+  # a little cleeaner.
+  day = db.func.strftime('%Y-%m-%d', Entry.created_on).label('day')
+
+  next_day = db.session.query(Entry)\
+                  .with_entities(
+                    Entry.id.label('id'),
+                    Entry.created_on.label('created_on'),
+                    day.label('day')
+                  ).filter(day > date_str).first()
+
+  prev_day = db.session.query(Entry)\
+                  .with_entities(
+                    Entry.id.label('id'),
+                    Entry.created_on.label('created_on'),
+                    day.label('day')
+                  ).filter(day < date_str).first()
+                  
+
+
+  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=reversed(clean_entries), next_day=next_day, prev_day=prev_day)
 
 
 
