@@ -183,7 +183,7 @@ def entry_by_date(date_str):
     clean_entries = entries
 
 
-  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=clean_entries)
+  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=reversed(clean_entries))
 
 
 
