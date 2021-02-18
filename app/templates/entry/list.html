@@ -3,6 +3,8 @@
 {% block title %}{{title}}{% endblock %}
 
 
+{% set types = {0: 'Overall', 1: 'Outlook', 2: 'Energy level', 3: 'Focus'} %}
+
 {% block subhead %}
   {% if date_target is defined and date_target|length %}
   <h2 class="subhead">{{ date_target }}</h2>
@@ -17,14 +19,24 @@
   {% for entry in entries %}
 
     <section class="entry">
+
+      <strong>{{ entry.created_on.strftime('%I:%M%p') }}</strong> <br>
+
+      {{ types[entry.type] }}: {{ entry.val }}<br>
       
-      raw: {{ entry[0] }}<br>
-
-      {{ entry.created_on }} <br>
-
-      {{ entry.id }}: {{ entry.val }}
+      {% if entry.children is defined %}
+        
+        {% for subentry in entry.children %}
+        
+          {{ types[subentry.type] }}: {{ subentry.val }}<br>
+        
+        {% endfor %}
+        
+      {% endif %}
 
     </section>
+    
+    <hr>
 
   {% endfor %}
   

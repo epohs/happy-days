@@ -143,19 +143,47 @@ def entry_by_date(date_str):
       entries = grouped_entries.all()
 
                       
-      flash( [{i:v for i, v in r.__dict__.items() if i in r.__table__.columns.keys()} for r in grouped_entries] )
+      #flash( [{i:v for i, v in r.__dict__.items() if i in r.__table__.columns.keys()} for r in grouped_entries] )
       
-      flash( str( grouped_entries.statement.compile(dialect=sqlite.dialect()) ) )
+      #flash( str( grouped_entries.statement.compile(dialect=sqlite.dialect()) ) )
 
     else:
 
-      entries = False
+      entries = None
 
       flash('date must be in the past')
 
+      
+  if entries:
+    
+    clean_entries = []
+    
+    for entry in entries:
+      
+      if entry.parent_id == 0:
+        
+        nice_entry = {'id': entry.id, 'val': entry.val, 'type': entry.entry_type, 'created_on': entry.created_on}
+        nice_children = []
+        
+        for subentry in entries:
+          
+          if subentry.parent_id == entry.id:
+            
+            nice_children.append({'id': subentry.id, 'val': subentry.val, 'type': subentry.entry_type, 'created_on': subentry.created_on})
+            
+        nice_entry['children'] = nice_children
+            
+        
+        clean_entries.append(nice_entry)
+        
+    #flash(clean_entries)
+        
+  else:
+    
+    clean_entries = entries
 
 
-  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=entries)
+  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=clean_entries)
 
 
 
