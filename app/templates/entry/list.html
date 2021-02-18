@@ -21,11 +21,11 @@
       <ul class="next-prev">
 
         {% if prev_day %}
-          <li class="prev"><a href="{{ url_for('entry_by_date', date_str=prev_day.day) }}" class="link">Prev</a></li>
+          <li class="item prev"><a href="{{ url_for('entry_by_date', date_str=prev_day.day) }}" class="link">Prev</a></li>
         {% endif %}
 
         {% if next_day %}
-          <li class="prev"><a href="{{ url_for('entry_by_date', date_str=next_day.day) }}" class="link">Next</a></li>
+          <li class="item next"><a href="{{ url_for('entry_by_date', date_str=next_day.day) }}" class="link">Next</a></li>
         {% endif %}
 
       </ul>
@@ -37,24 +37,30 @@
 
 
   {% if entries %}
+  
+  <div class="entries">
 
   {% for entry in entries %}
 
     <section class="entry">
 
-      <strong>{{ entry.created_on.strftime('%-I:%M%p') }}</strong> <br>
+      <h3 class="heading entry-time">{{ entry.created_on.strftime('%-I:%M%p') }}</h3>
 
-      {{ types[entry.type] }}: {{ entry.val }}<br>
+      <ul class="entry-values">
+        
+        <li class="entry-val-item {{ types[entry.type]|lower|replace('.', '') }}"><span class="entry-val-label">{{ types[entry.type] }}:</span> <span class="entry-val">{{ entry.val }}</span></li>
       
-      {% if entry.children is defined %}
-        
-        {% for subentry in entry.children %}
-        
-          {{ types[subentry.type] }}: {{ subentry.val }}<br>
-        
-        {% endfor %}
-        
-      {% endif %}
+        {% if entry.children is defined %}
+          
+          {% for subentry in entry.children %}
+          
+            <li class="entry-val-item {{ types[subentry.type]|lower|replace('.', '') }}"><span class="entry-val-label">{{ types[subentry.type] }}:</span> <span class="entry-val">{{ subentry.val }}</span></li>
+          
+          {% endfor %}
+          
+        {% endif %}
+      
+      </ul>
 
     </section>
     
@@ -62,9 +68,15 @@
 
   {% endfor %}
   
+  </div>
+  
   {% else %}
   
-    No entries
+  <div class="entry-wrap no-entries">
+  
+    <p>No entries for this date.</p>
+    
+  </div>
     
   {% endif %}
   

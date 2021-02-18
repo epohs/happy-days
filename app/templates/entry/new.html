@@ -16,34 +16,34 @@
 
     {{ form.hidden_tag() }}
 
-    <fieldset class="fieldset required">
+    <fieldset class="fieldset entry-values required">
 
       <legend class="legend">Required</legend>
 
-      <div class="field-wrap field-{{ form.overall.name|lower|replace(' ','-') }}">
-        <span class="label-wrap">{{ form.overall.label(class="label") }}</span>
+      <div class="field-wrap field-{{ form.overall.name|lower|replace(' ','-') }} entry-val-item">
+        <span class="label-wrap entry-val-label">{{ form.overall.label(class="label") }}</span>
         <span class="input-wrap">{{ form.overall(min='0', max='5', step="0.5") }}</span>
       </div>
 
     </fieldset>
 
 
-    <fieldset class="fieldset optional">
+    <fieldset class="fieldset entry-values optional">
 
       <legend class="legend">Optional</legend>
 
-      <div class="field-wrap field-{{ form.outlook.name|lower|replace(' ','-') }}">
-        <span class="label-wrap">{{ form.outlook.label(class="label") }}</span>
+      <div class="field-wrap field-{{ form.outlook.name|lower|replace(' ','-') }} entry-val-item">
+        <span class="label-wrap entry-val-label">{{ form.outlook.label(class="label") }}</span>
         <span class="input-wrap">{{ form.outlook(min='0', max='5', step="0.5", value="0") }}</span>
       </div>
       
-      <div class="field-wrap field-{{ form.energy.name|lower|replace(' ','-') }}">
-        <span class="label-wrap">{{ form.energy.label(class="label") }}</span>
+      <div class="field-wrap field-{{ form.energy.name|lower|replace(' ','-') }} entry-val-item">
+        <span class="label-wrap entry-val-label">{{ form.energy.label(class="label") }}</span>
         <span class="input-wrap">{{ form.energy(min='0', max='5', step="0.5", value="0") }}</span>
       </div>
 
-      <div class="field-wrap field-{{ form.focus.name|lower|replace(' ','-') }}">
-        <span class="label-wrap">{{ form.focus.label(class="label") }}</span>
+      <div class="field-wrap field-{{ form.focus.name|lower|replace(' ','-') }} entry-val-item">
+        <span class="label-wrap entry-val-label">{{ form.focus.label(class="label") }}</span>
         <span class="input-wrap">{{ form.focus(min='0', max='5', step="0.5", value="0") }}</span>
       </div>
 
