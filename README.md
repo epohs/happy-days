@@ -29,6 +29,24 @@ The goal of this project is to help you set up a site on a [Raspberry Pi](https:
 1. `cd` into your new directory and clone this repo.
 
 
+## To-Do
+
+1. Next/Prev buttons in list view
+1. Better HTML Markup
+1. Date labels on dashboard graph
+1. Custom form errors in HTML
+1. Display dynamic slider values 
+1. CSS Styling
+  1. [Form field styling](https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/)
+  1. Colors and styling on New Entry page
+  1. Style list view
+1. Fontello icons for nav
+1. Account management page
+1. Change `created_on` to `created_at` and `modified_on` to `updated_at`
+  1. Create migration for this
+1. Code cleanup and documentation
+1. Project documentation in Git
+
 
 ### Helpful links
 
