@@ -20,7 +20,7 @@
 
     <section class="entry">
 
-      <strong>{{ entry.created_on.strftime('%I:%M%p') }}</strong> <br>
+      <strong>{{ entry.created_on.strftime('%-I:%M%p') }}</strong> <br>
 
       {{ types[entry.type] }}: {{ entry.val }}<br>
       
