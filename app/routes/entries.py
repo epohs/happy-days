@@ -208,10 +208,11 @@ def entry_by_date(date_str):
                     Entry.created_on.label('created_on'),
                     day.label('day')
                   ).filter(day < date_str).first()
-                  
 
 
-  return render_template('entry/list.html', title='Entry by date', date_target=date_str, entries=reversed(clean_entries), next_day=next_day, prev_day=prev_day)
+  date_target = date_obj.strftime("%A, %b. %d %Y")
+
+  return render_template('entry/list.html', title='Entry by date', date_target=date_target, entries=reversed(clean_entries), next_day=next_day, prev_day=prev_day)
 
 
 
