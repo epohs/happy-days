@@ -22,7 +22,15 @@
 
       <div class="field-wrap field-{{ form.overall.name|lower|replace(' ','-') }} entry-val-item">
         <span class="label-wrap entry-val-label">{{ form.overall.label(class="label") }}</span>
-        <span class="input-wrap">{{ form.overall(min='0', max='5', step="0.5") }}</span>
+        <span class="input-wrap">{{ form.overall(min='0', max='5', step="0.5", value="2.5") }}</span>
+        <span class="entry-val">2.5</span>
+        {% if form.overall.errors %}
+        <ul class="form-errors">
+          {% for error in form.overall.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </div>
 
     </fieldset>
@@ -35,16 +43,40 @@
       <div class="field-wrap field-{{ form.outlook.name|lower|replace(' ','-') }} entry-val-item">
         <span class="label-wrap entry-val-label">{{ form.outlook.label(class="label") }}</span>
         <span class="input-wrap">{{ form.outlook(min='0', max='5', step="0.5", value="0") }}</span>
+        <span class="entry-val">0</span>
+        {% if form.outlook.errors %}
+        <ul class="form-errors">
+          {% for error in form.outlook.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </div>
       
       <div class="field-wrap field-{{ form.energy.name|lower|replace(' ','-') }} entry-val-item">
         <span class="label-wrap entry-val-label">{{ form.energy.label(class="label") }}</span>
         <span class="input-wrap">{{ form.energy(min='0', max='5', step="0.5", value="0") }}</span>
+        <span class="entry-val">0</span>
+        {% if form.energy.errors %}
+        <ul class="form-errors">
+          {% for error in form.energy.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </div>
 
       <div class="field-wrap field-{{ form.focus.name|lower|replace(' ','-') }} entry-val-item">
         <span class="label-wrap entry-val-label">{{ form.focus.label(class="label") }}</span>
         <span class="input-wrap">{{ form.focus(min='0', max='5', step="0.5", value="0") }}</span>
+        <span class="entry-val">0</span>
+        {% if form.focus.errors %}
+        <ul class="form-errors">
+          {% for error in form.focus.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </div>
 
     </fieldset>

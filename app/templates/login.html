@@ -4,18 +4,45 @@
 
 {% block content %}
 
-  <form action="{{ url_for('login') }}" method="post" novalidate>
+  <form action="{{ url_for('login') }}" method="post" class="hd-form" novalidate>
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit() }}</p>
+
+    <fieldset class="fieldset required">
+
+    <div class="field-wrap field-{{ form.username.name|lower|replace(' ','-') }}">
+      <span class="label-wrap">{{ form.username.label }}<span>
+      <span class="input-wrap">{{ form.username(size=32) }}</span>
+      {% if form.username.errors %}
+      <ul class="form-errors">
+        {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    
+    <div class="field-wrap field-{{ form.password.name|lower|replace(' ','-') }}">
+      <span class="label-wrap">{{ form.password.label }}</span>
+      <span class="input-wrap">{{ form.password(size=32) }}</span>
+      {% if form.password.errors %}
+      <ul class="form-errors">
+        {% for error in form.password.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <div class="field-wrap field-{{ form.password.name|lower|replace(' ','-') }}">
+      <span class="label-wrap">{{ form.remember_me() }}</span>
+      <span class="input-wrap">{{ form.remember_me.label }}</span>
+    </div>
+
+    </fieldset>
+
+    <div class="field-wrap field-{{ form.submit.name|lower|replace(' ','-') }}">
+      {{ form.submit(class="btn") }}
+    </div>
   </form>
   
 {% endblock %}
