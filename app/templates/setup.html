@@ -2,21 +2,13 @@
 
 {% block title %}{{title}}{% endblock %}
 
-{% block content %}
 
-  {% if bullets %}
-  <ul>
-    {% for bullet in bullets %}
-    <li>{{ bullet.text }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-  
+{% block content %}  
   
   {% if user_modified %}
     <p>The database was updated. You should set all of your Admin User fields
       to false in config.py <strong>right now</strong>.</p>
-    <p>After you've cleared your config file you can <a href="{{ url_for('login') }}">Log in</a>.</p>
+    <p>After you've cleared your config file <a href="{{ url_for('index') }}">Head on in</a>.</p>
   {% endif %}
   
   
@@ -24,8 +16,11 @@
     <p>
       <strong>Update the database with the user in your config file?</strong>
       <a href="{{ url_for('setup') }}?modify_user=yes">Yes</a>
-      <a href="{{ url_for('setup') }}">No</a>
     </p>
+  {% elif not modify_user %}
+  
+    <p>You don't have valid data in your config.py file. No changes will be made to the database.</p>
+  
   {% endif %}
   
 {% endblock %}
