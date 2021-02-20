@@ -2,8 +2,9 @@ from config import AdminUser
 from app import app, db
 from app.models import User
 from app.forms import LoginForm
+from sqlalchemy import or_
 from werkzeug.security import generate_password_hash
-from flask import render_template, flash, url_for, redirect, request
+from flask import render_template, flash, get_flashed_messages, url_for, redirect, request
 from flask_login import current_user, login_user, logout_user
 import re
 
@@ -86,39 +87,66 @@ def logout():
 @app.route('/setup')
 def setup():
   
-  modify_user = True
+  modify_user = False
   update_confirmed = False
-  #user_modified = True if (request.args['user_modified'] == 'true') else False
   user_modified = False
-  bullets = []
+  warnings = 0
   
   # Check the validity of the Admin User in config file.
   if ( not AdminUser.USER or len(AdminUser.USER) < 5 ):
     
-    bullets.append( {'text': 'Username required'} )
+    flash('Username empty')
+    valid_user = False
+    warnings += 1
     
+  else:
+    
+    valid_user = True
+
+
   if ( not AdminUser.PASS or len(AdminUser.PASS) < 6 ):
     
-    bullets.append( {'text': 'Password required'} )
+    flash('Password empty')
+    valid_pass = False
+    warnings += 1
     
+  else:
+    
+    valid_pass = True
+
+
   if ( not AdminUser.EMAIL or not check_email_format(AdminUser.EMAIL) ):
     
-    bullets.append( {'text': 'Email required'} )
+    flash('Email empty')
+    valid_email = False
+    warnings += 1
+    
+  else:
+    
+    valid_email = True
     
   
-  # If we don't have any warning bullets
+    
+  # If we have less than 3 error messages
   # the user format is okay.
-  if ( len(bullets) <= 0 ):
+  if ( warnings < 3 ):
     
     modify_user = True
     
 
+    
   ## Here we go
   if ( modify_user and (request.args.get('modify_user') == 'yes') ):
     
-    user = User.query.filter_by(username=AdminUser.USER).first()
+    user = User.query.filter(
+                          or_(
+                            User.username == str(AdminUser.USER),
+                            User.email == str(AdminUser.EMAIL)
+                        )).first()
 
-    if ( user is None ):
+    # No matching user was found in the database
+    # so we will insert a new user.
+    if ( user is None and (warnings <= 0) ):
       
       newUser = User(username = AdminUser.USER,
                       email = AdminUser.EMAIL,
@@ -130,20 +158,45 @@ def setup():
 
       db.session.add(newUser)
       
+      flash('New user added.')
+      
+    elif ( user is None and (warnings > 0) ):
+      
+      flash('Enter all Admin User data in config.py to add your first user.')
+    
+    # A user matching AdminUser in config.py was
+    # found in the db, so we will update it.
     else:
       
-      user.email = AdminUser.EMAIL
-      user.password = generate_password_hash(
-                          AdminUser.PASS,
-                          method='sha256'
-                        )
+      if valid_user:
+  
+        user.username = AdminUser.USER
+      
+      if valid_pass:
+        user.password = generate_password_hash(
+                            AdminUser.PASS,
+                            method='sha256'
+                          )
+
+      if valid_email:
+  
+        user.email = AdminUser.EMAIL
+
+
+      flash('User updated.') 
       
     db.session.commit()
     
     user_modified = True
+  
+  # No valid data in config.py means we don't
+  # have enough info to update the database.
+  elif( warnings >= 3 ):
+    
+    flash('Database will not be updated.')
 
 
   
-  return render_template('setup.html', title='Setup', bullets=bullets, modify_user=True, user_modified=user_modified)
+  return render_template('setup.html', title='Setup', modify_user=modify_user, user_modified=user_modified)
 
     
