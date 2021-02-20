@@ -48,8 +48,10 @@ def login():
         return redirect(url_for('index'))
 
     form = LoginForm()
+    
+    form.validate_on_submit()
 
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST':
         
         user = User.query.filter_by(username=form.username.data).first()
         
