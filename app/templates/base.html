@@ -13,7 +13,7 @@
 {% endassets %}
 
 </head>
-<body>
+<body class="page-{{ request.endpoint|lower|replace('_', '-') }}">
   
   <header class="page-header">
 
