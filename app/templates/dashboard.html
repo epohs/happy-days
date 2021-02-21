@@ -32,9 +32,12 @@
       {% set entry_val_class = 'entry-val-' ~ val|replace('.', '') %}
    
       <li class="entry {{ entry_val_class }}{% if multiple_entries %} multiple-entries{% endif %}">
-  
-      <a href="{{ url_for('entry_by_date', date_str=entry.created_on.strftime('%Y-%m-%d')) }}" class="link">{{ entry.days_ago|round(0, 'floor')|int }}<span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span></a>
-  
+    
+        <a href="{{ url_for('entry_by_date', date_str=entry.created_on.strftime('%Y-%m-%d')) }}" class="link">
+          {{ entry.days_ago|round(0, 'floor')|int }}
+          <span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span>  
+        </a>
+    
       </li>
       
     {% endif %}
@@ -42,7 +45,6 @@
   {% endfor %}
   </ul>
   {% endif %}
-
-  <p>Gonna be the main template homepage.</p>
+  
 
 {% endblock %}
