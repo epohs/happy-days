@@ -21,6 +21,8 @@ def make_asset_bundles():
   assets.register('js_all', js)
 
 
+  
+
 
 
 @app.before_request
