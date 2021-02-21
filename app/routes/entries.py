@@ -1,7 +1,6 @@
 from app import app, db
 from app.forms import NewEntry
 from app.models import Entry
-from flask import g
 from flask import render_template, flash, url_for, redirect, request
 from flask_login import current_user, login_required
 from sqlalchemy import extract, or_
@@ -26,7 +25,7 @@ def new_entry():
     
     newEntry = Entry(
                   val = overall,
-                  user_id = g.user
+                  user_id = current_user.get_id()
                 )
   
     db.session.add(newEntry)
@@ -44,7 +43,7 @@ def new_entry():
                         val = outlook,
                         entry_type = 1,
                         parent_id = newEntry.id,
-                        user_id = g.user
+                        user_id = current_user.get_id()
                       )
         
         db.session.add(newOutlook)
@@ -55,7 +54,7 @@ def new_entry():
                         val = energy,
                         entry_type = 2,
                         parent_id = newEntry.id,
-                        user_id = g.user
+                        user_id = current_user.get_id()
                       )
         
         db.session.add(newEnergy)
@@ -66,7 +65,7 @@ def new_entry():
                         val = focus,
                         entry_type = 3,
                         parent_id = newEntry.id,
-                        user_id = g.user
+                        user_id = current_user.get_id()
                       )
         
         db.session.add(newFocus)
