@@ -63,9 +63,11 @@ def dashboard():
       
     else:
       
+      date_ago = current_time - timedelta(days=day_ago)
+
       # Result didn't match this day_ago.
       # Append our empty flag.
-      entries_in_range.append([{'has_no_entry': True}])
+      entries_in_range.append([{'has_no_entry': True, 'date_ago': date_ago}])
       
       #flash("no entry {} days ago".format(day_ago))
   
