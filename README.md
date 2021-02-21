@@ -33,9 +33,9 @@ The goal of this project is to help you set up a site on a [Raspberry Pi](https:
 
 1. [x] Next/Prev buttons in list view
 1. [x] Better HTML Markup
-1. [ ] Date labels on dashboard graph
+1. [x] Date labels on dashboard graph
 1. [x] Custom form errors in HTML
-1. [ ] Display dynamic slider values 
+1. [x] Display dynamic slider values 
 1. [ ] CSS Styling
     1. [ ] [Form field styling](https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/)
     1. [ ] Colors and styling on New Entry page

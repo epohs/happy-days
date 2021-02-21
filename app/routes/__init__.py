@@ -14,7 +14,7 @@ def make_asset_bundles():
   css = Bundle('css/reset.css', 'css/fonts.css', 'css/colors.css', 'css/base.css', 'css/responsive.css',
               filters='cssmin', output='packed/app.css')
     
-  js = Bundle('js/base.js',
+  js = Bundle('js/base.js', 'js/entries.js',
               filters='jsmin', output='packed/app.js')
 
   assets.register('css_all', css)              
