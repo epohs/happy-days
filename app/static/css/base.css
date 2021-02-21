@@ -14,7 +14,7 @@ a:visited {
 }
 
 a {
-	color: var(--link);
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -75,11 +75,14 @@ a:active {
   text-transform: uppercase;
 }
 
+.page-body {
+  padding-bottom: 5em;
+}
+
 .page-body .content {
   max-width: 60rem; 
   margin: 0 auto;
 }
-
 
 
 
@@ -107,7 +110,7 @@ a:active {
   width: calc((100% - 1px) / 30);
   height: 100%;
   margin: 0 .5px;
-  overflow: hidden;
+  position: relative;
 }
 
 .recent-entries .entry:first-of-type {
@@ -129,7 +132,7 @@ a:active {
 }
 
 .recent-entries .entry .summary {
-	position: relative;
+  position: relative;
   flex-basis: 50%;
   flex-grow: 0;
   flex-shrink: 1;
@@ -185,10 +188,157 @@ a:active {
   background-color: var(--entry-on);
 }
 
+.recent-entries .entry::after {
+  display: none;
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  content: '';
+  width: 1px;
+  height: 0.25em;
+  background-color: var(--border-light);
+}
+
+.recent-entries .entry-date {
+  display: none;
+  position: absolute;
+  top: calc((100% + 1px) + 0.25em);
+  left: 50%;
+  margin-top: 0.3em;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-weight: 200;
+  font-size: 0.7em;
+  line-height: 1;
+}
+
+.recent-entries .entry:first-of-type::after,
+.recent-entries .entry:first-of-type .entry-date {
+  display: block;
+}
+
+.recent-entries .entry:last-of-type::after,
+.recent-entries .entry:last-of-type .entry-date,
+.recent-entries .entry:nth-child(16)::after,
+.recent-entries .entry:nth-child(16) .entry-date {
+  display: block;
+}
+
+.recent-entries .entry:first-of-type .entry-date {
+  left: auto;
+  transform: none;
+  right: 0;
+}
+
+.recent-entries .entry:last-of-type .entry-date {
+  left: 0;
+  transform: none;
+}
+
+.recent-entries .entry-date .full {
+ display: none;
+}
 
 
 
 
+/* Entries */
+
+.entry-val-item .entry-val-label {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.entry-val-item .entry-val {
+  display: block;
+  font-size: 1.8em;
+  font-weight: 200;
+}
+
+.entry-val-item .entry-val-label {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.entry-val-item.field-overall .entry-val-label {
+  font-size: 2em;
+  font-weight: 200;
+}
+
+.entry-val-item.field-overall > .entry-val {
+  color: var(--val-overall);
+  font-weight: 300;
+}
+
+.entry-val-item.field-outlook > .entry-val {
+  color: var(--val-outlook);
+}
+
+.entry-val-item.field-energy-level > .entry-val {
+  color: var(--val-energy);
+}
+
+.entry-val-item.field-focus > .entry-val {
+  color: var(--val-focus);
+}
+
+
+
+
+
+
+/* List view */
+
+.next-prev-wrap {}
+
+.next-prev-wrap .next-prev {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0 auto 3em auto;
+}
+
+.next-prev-wrap .next-prev .item {
+  display: inline-block;
+}
+
+.next-prev-wrap .next-prev .item.next {
+  margin-left: auto;
+}
+
+
+
+.entry-list.entries .heading.entry-time {
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.entry-list.entries .entry-values {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-list.entries .entry-values > .entry-val-item {
+  display: block;
+}
+
+.entry-list.entries .field-overall {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.entry-list .separator {
+  height: 1px;
+  overflow: hidden;
+  max-width: 25em;
+  border: none;
+  margin: 3em auto;
+  background-color: var(--border-light);
+}
 
 
 
@@ -240,20 +390,9 @@ a:active {
   display: block;
 }
 
-.hd-form .label {
-  font-size: 1.5em;
-  font-weight: 200;
-}
-
-.hd-form .fieldset.required .label {
-  font-size: 2em;
-  font-weight: 400;
-}
-
 .hd-form .input-wrap {
   display: block;
 }
-
 
 .hd-form .field-wrap.field-submit {
   margin-top: 2em;
