@@ -5,7 +5,7 @@ from app.forms import LoginForm
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash
 from flask import render_template, flash, get_flashed_messages, url_for, redirect, request
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 import re
 
 
@@ -32,14 +32,21 @@ def login_check():
     
     return [False, 'login']
 
+
+
     
+
 
 def check_email_format(str):
 
   regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
   
   return re.search(regex, str)
-  
+
+
+
+
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -77,6 +84,7 @@ def login():
     
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -84,6 +92,7 @@ def logout():
 
 
 
+    
 @app.route('/setup')
 def setup():
   

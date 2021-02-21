@@ -1,23 +1,18 @@
 from app import app, db, assets
 from app.models import Entry
-from flask import g
 from flask import render_template, flash, url_for, redirect, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 from sqlalchemy import func
 from datetime import datetime, timedelta 
 import math
 
-@app.route('/dashboard')
-def dashboard():
-  
-  if current_user.is_authenticated:
-    
-    g.user = current_user.get_id()
-    
-  else:
-    
-    return redirect(url_for('index'))
 
+
+
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
 
   day = func.strftime('%m/%d/%Y', Entry.created_on).label('day')
   avg = func.avg(Entry.val).label('avg')
@@ -37,7 +32,7 @@ def dashboard():
     num_entries
   ).filter(Entry.created_on >= thirty_days_ago)\
     .filter_by(
-      user_id = g.user,
+      user_id = current_user.get_id(),
       parent_id = 0,
       entry_type = 0
     ).order_by(day.desc()).group_by(day).all()

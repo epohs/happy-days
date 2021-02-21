@@ -3,7 +3,7 @@ from app.forms import NewEntry
 from app.models import Entry
 from flask import g
 from flask import render_template, flash, url_for, redirect, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 from sqlalchemy import extract, or_
 from sqlalchemy.dialects import sqlite
 from datetime import datetime
@@ -12,16 +12,8 @@ from datetime import datetime
 
 
 @app.route('/new', methods=['GET', 'POST'])
-def new_entry():
-  
-  if current_user.is_authenticated:
-    
-    g.user = current_user.get_id()
-    
-  else:
-    
-    return redirect(url_for('index'))
-    
+@login_required
+def new_entry():  
   
   form = NewEntry()
   
@@ -103,6 +95,7 @@ def new_entry():
 
 
 @app.route('/entry/by/date/<date_str>')
+@login_required
 def entry_by_date(date_str):
 
   try:
