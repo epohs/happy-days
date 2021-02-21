@@ -13,7 +13,13 @@
   
     {% if entry.has_no_entry %}
     
-      <li class="entry no-results"><span class="summary">No entries</span></li>
+      <li class="entry no-results">
+        <span class="summary">No entries</span>
+        <span class="entry-date">
+          <span class="full">{{ entry.date_ago.strftime('%a, %b. %d') }}</span>
+          <span class="short">{{ entry.date_ago.strftime('%-d/%m') }}</span>
+        </span>
+      </li>
       
     {% else %}
       
@@ -34,9 +40,12 @@
       <li class="entry {{ entry_val_class }}{% if multiple_entries %} multiple-entries{% endif %}">
     
         <a href="{{ url_for('entry_by_date', date_str=entry.created_on.strftime('%Y-%m-%d')) }}" class="link">
-          {{ entry.days_ago|round(0, 'floor')|int }}
-          <span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span>  
+          <span class="summary">{{ entry.created_on.strftime('%b. %d') }} - {{ val }}{% if multiple_entries %} *{% endif %}</span>
         </a>
+        <span class="entry-date">
+          <span class="full">{{ entry.created_on.strftime('%a, %b. %d') }}</span>
+          <span class="short">{{ entry.created_on.strftime('%-d/%m') }}</span>
+        </span>
     
       </li>
       
