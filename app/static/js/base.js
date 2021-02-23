@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       console.log('attaching to: ' + item.getAttribute('id'));
       
-      item.addEventListener( 'change', event => hd.entries.update_entry_val(item) )
+      item.addEventListener( 'input', event => hd.entries.update_entry_val(item) )
 
     }); // forEach(sliders)
 
