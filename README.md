@@ -2,7 +2,9 @@
 
 ## Keep track of your mindset
 
-The goal of this project is to help you set up a site on a [Raspberry Pi](https://www.raspberrypi.org) in your own home. The site will let you keep track of how you feel on any given day, and see those days tracked in a graph. Ultimately giving you a better idea of the patterns of your mood and what you can do to stay happy more of the time.
+The goal of this project is to walk you through setting up and hosting a database driven website on a [Raspberry Pi](https://www.raspberrypi.org) in your home. The site will be driven by Python, served by nginx, and will allow you to point your own domain name at the site using CloudFlare DNS.
+
+The website in this project will let you keep track of how you feel on any given day, and see those days tracked in a graph. Hopefully giving you a better idea of the patterns of your mood and what you can do to stay happy more of the time.
 
 ### Software and services used in the project
 
