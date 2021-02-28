@@ -2,13 +2,49 @@
 
 {% block title %}{{title}}{% endblock %}
 
+{% block subhead %}
+  <h2 class="subhead">{{current_user.username}}</h2>
+{% endblock %}
+
 
 {% block content %}  
 
 
-<p>Your account.</p>
+<p>You signed up on {{ current_user.created_on.strftime('%m/%d/%Y') }}.</p>
 
-<p>endpoint {{request.endpoint}}</p>
-      
+<p>Your first entry was on {{my_entries.day}}, and you have a total of {{my_entries.num_entries}} entries.</p>
+
+<hr />
+
+<h3>Change Password</h3>
+
+<form action="{{ url_for('account') }}" method="post" class="hd-form" novalidate>
+
+  {{ form.hidden_tag() }}
+
+  <fieldset class="fieldset required">
+
+  <div class="field-wrap field-password">
+    <span class="label-wrap">{{ form.password.label }}</span>
+    <span class="input-wrap">{{ form.password(size=32) }}</span>
+    {% if form.password.errors %}
+    <ul class="form-errors">
+      {% for error in form.password.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  
+  <div class="field-wrap field-password-confirm">
+    <span class="label-wrap">{{ form.confirm.label }}</span>
+    <span class="input-wrap">{{ form.confirm(size=32) }}</span>
+  </div>
+
+  <div class="field-wrap field-{{ form.submit.name|lower|replace(' ','-') }}">
+    {{ form.submit(class="btn") }}
+  </div>
+
+</form>
   
 {% endblock %}

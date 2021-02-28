@@ -1,8 +1,8 @@
 from config import AdminUser
 from app import app, db
-from app.models import User
-from app.forms import LoginForm
-from sqlalchemy import or_
+from app.models import User, Entry
+from app.forms import LoginForm, ChangePassword
+from sqlalchemy import or_, func
 from werkzeug.security import generate_password_hash
 from flask import render_template, flash, get_flashed_messages, url_for, redirect, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -94,11 +94,37 @@ def logout():
 
 
 
-@app.route('/account')
+@app.route('/account', methods=["GET", "POST"])
 @login_required
 def account():
   
-    return render_template('account.html', title='Your Account')
+  num_entries = func.count(Entry.id).label('num_entries')
+  day = func.strftime('%m/%d/%Y', Entry.created_on).label('day')
+  
+  # Get a count of all top level entries
+  # by the current user.
+  my_entries = db.session.query(
+    num_entries,
+    day
+    ).filter_by(
+      user_id = current_user.get_id(),
+      parent_id = 0,
+      entry_type = 0
+      ).order_by(Entry.created_on.asc()).first()
+      
+  form = ChangePassword()
+  
+  if form.validate_on_submit() and (request.form.get('form_id') == 'change-password'):
+  
+    current_user.password = generate_password_hash(
+                          request.form.get('password'),
+                          method='sha256'
+                        )
+    db.session.commit()
+    
+    flash('Password updated')
+  
+  return render_template('account.html', title='Your Account', my_entries=my_entries, form=form)
 
 
 
