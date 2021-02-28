@@ -23,7 +23,7 @@ def login_check():
 
     
   # If current user is logged in redirect to
-  # the dashboard, otherwise log in. 
+  # the dashboard, otherwise to log in page. 
   if current_user.is_authenticated:
     
     return [True, 'dashboard']
@@ -102,24 +102,28 @@ def account():
   day = func.strftime('%m/%d/%Y', Entry.created_on).label('day')
   
   # Get a count of all top level entries
-  # by the current user.
+  # by the current user, and the date of
+  # the first entry.
   my_entries = db.session.query(
-    num_entries,
-    day
+      num_entries,
+      day
     ).filter_by(
-      user_id = current_user.get_id(),
-      parent_id = 0,
-      entry_type = 0
+        user_id = current_user.get_id(),
+        parent_id = 0,
+        entry_type = 0
       ).order_by(Entry.created_on.asc()).first()
       
   form = ChangePassword()
   
+  # We validate the form and make sure it was
+  # the change-password form that was submitted
   if form.validate_on_submit() and (request.form.get('form_id') == 'change-password'):
   
     current_user.password = generate_password_hash(
                           request.form.get('password'),
                           method='sha256'
                         )
+                        
     db.session.commit()
     
     flash('Password updated')

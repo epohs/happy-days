@@ -38,7 +38,7 @@ The website in this project will let you keep track of how you feel on any given
 1. [x] Date labels on dashboard graph
 1. [x] Custom form errors in HTML
 1. [x] Display dynamic slider values
-1. [ ] Account management page
+1. [x] Account management page
 1. [ ] Fontello icons for nav
 1. [ ] CSS Styling
     1. [ ] [Form field styling](https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/)
