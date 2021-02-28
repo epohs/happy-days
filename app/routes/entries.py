@@ -160,9 +160,15 @@ def entry_by_date(date_str):
       
       if entry.parent_id == 0:
         
+        # Nice entry is the structure of our
+        # data after we clean and validate it
+        # in the code below.
         nice_entry = {'id': entry.id, 'val': entry.val, 'type': entry.entry_type, 'created_on': entry.created_on}
         nice_children = []
         
+        # Loop through our database results
+        # And append the child entries to 
+        # their parent entries.
         for subentry in entries:
           
           if subentry.parent_id == entry.id:
