@@ -198,14 +198,16 @@ def entry_by_date(date_str):
                     Entry.id.label('id'),
                     Entry.created_on.label('created_on'),
                     day.label('day')
-                  ).filter(day > date_str).first()
+                  ).filter(day > date_str)\
+                  .order_by(Entry.created_on.asc()).first()
 
   prev_day = db.session.query(Entry)\
                   .with_entities(
                     Entry.id.label('id'),
                     Entry.created_on.label('created_on'),
                     day.label('day')
-                  ).filter(day < date_str).first()
+                  ).filter(day < date_str)\
+                  .order_by(Entry.created_on.desc()).first()
 
 
   date_target = date_obj.strftime("%A, %b. %d %Y")
