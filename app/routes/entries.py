@@ -121,7 +121,9 @@ def entry_by_date(date_str):
                       .with_entities(Entry.id)\
                       .filter(
                         Entry.parent_id == 0,
-                        extract('day', Entry.created_on) == date_obj.day
+                        extract('day', Entry.created_on) == date_obj.day,
+                        extract('month', Entry.created_on) == date_obj.month,
+                        extract('year', Entry.created_on) == date_obj.year
                       )
                       
       grouped_entries = db.session.query(Entry)\
